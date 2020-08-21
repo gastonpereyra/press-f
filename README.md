@@ -1,58 +1,78 @@
-# Template NPM Packages
+# Press F
 
-![npm-template](https://user-images.githubusercontent.com/39351850/89736287-af2cd580-da3e-11ea-86f2-f1829c3fafdf.png)
+![Build Status](https://github.com/gastonpereyra/press-f/workflows/Build%20Status/badge.svg)
+[![Coverage Status](https://img.shields.io/coveralls/github/gastonpereyra/press-f/master.svg)](https://coveralls.io/r/gastonpereyra/press-f?branch=master)
 
-## :loudspeaker: Description
-This is a template repository to make easier configurate NPM package repositories
+![npmF](https://user-images.githubusercontent.com/39351850/90847511-113fe180-e341-11ea-9676-12964f43a55a.png)
 
-## :floppy_disk: Installation
+## Description
+When an Error happens, press "f" to pay respect. A funny replace to Error class.
 
-Steps :walking: :
+## Installation
 
-1. :chestnut: In the *Top-Navbar*, at right corner, on *+*, click **new Repository**
+```
+npm i press-f
+```
 
-![New Repository](https://user-images.githubusercontent.com/39351850/89736268-83115480-da3e-11ea-988d-066ce80f88b9.png)
+## Usage
 
-2. :seedling: In *Repository Template*, open menu, click *npm-template*
+### new F(message)
 
-![Use Template](https://user-images.githubusercontent.com/39351850/89736261-7ee53700-da3e-11ea-855f-f6ef9162b609.png)
+Replace of `new Error('some message')`
 
-3. :four_leaf_clover: Fill the **Repository Name**
-4. :blossom: Add a **Description**
-5. :bouquet: Click **Create Repository**
+```js
+const F = require('press-f');
 
-## :white_check_mark: Content
+if(shouldNotHappen())
+    throw new F('This should not happen because i don\'t like it');
 
-<details>
- <summary><b> :bookmark: NPM - `package.json` </b></summary>
+/*
+output: 
+        throw new F(This should not happen because i don\'t like it');
+        ^
 
-* `Mocha` and `Sinon` testings dependencies, and `test` / `test-ci` script
-* `Nyc` coverage dependency, `.nycrc` file and `coverage` script
-* `eslint` and `eslint-airbnb` linter dependencies and `.eslintrc.js` file
-* `root/lib/` as file container
+Press F: This should not happen because i don't like it
+    at ...
+*/
+```
 
-</details>
+### new F()
 
-<details>
- <summary><b> :bar_chart: Actions Workflows </b></summary>
+Replace of `new Error()`
 
-* Build Status to run tests, on every branches
-* Coverage status to generate Coveralls badge on push and PR
-* Linter status for push and PR
-* NPM publish on releases
+```js
+const F = require('press-f');
 
-</details>
+if(shouldNotHappen())
+    throw new F();
 
-<details>
- <summary><b> :scroll: README Template </b></summary>
+/*
+output: 
+        throw new F();
+        ^
 
-* Some Block pre-build
-* Build Status and Coverage Status badges
-* Must change `tpl` extension for `md`
+Press F: Pay Respect
+    at ...
+*/
+```
 
-</details>
+### new F(message, name)
 
-#  :pencil: References
+Replace of `new Error(message)` but change Error name for a custom one, if `name` is *string*
 
-* Templates in :us: [Click HERE!!!!!](https://docs.github.com/en/github/managing-your-work-on-github/about-project-boards)
-* Templates en :es: [Click ACA!!!!!](https://docs.github.com/es/github/creating-cloning-and-archiving-repositories/creating-a-template-repository)
+```js
+const F = require('press-f');
+
+if(shouldNotHappen())
+    throw new F('I don\'t care', 'This is not an Error');
+
+/*
+output: 
+        throw new F();
+        ^
+
+This is not an Error: I don't care
+    at ...
+*/
+```
+
