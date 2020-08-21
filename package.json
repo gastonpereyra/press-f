@@ -19,7 +19,11 @@
     "type": "git",
     "url": "git+https://github.com/gastonpereyra/press-f.git"
   },
-  "keywords": [],
+  "keywords": [
+    "error",
+    "memes",
+    "funny"
+  ],
   "author": "Gastón Pereyra",
   "license": "MIT",
   "bugs": {
