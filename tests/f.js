@@ -74,4 +74,47 @@ describe('Press F', () => {
 			});
 		});
 	});
+
+	context('When error came from another error', () => {
+
+		it('Should Keep Error in previousError field', () => {
+
+			const firstError = new Error('First');
+			const secondError = new F(firstError);
+
+			assert.deepStrictEqual(secondError.previousError, firstError);
+		});
+
+		it('Should Add Custom Error name and keep the previous Error', () => {
+
+			const firstError = new Error('First');
+			const secondError = new F(firstError, 'Custom');
+
+			assert.deepStrictEqual({
+				errorName: secondError.name,
+				errorMessage: secondError.message,
+				previousError: secondError.previousError
+			}, {
+				errorName: 'Custom',
+				errorMessage: 'Error: First',
+				previousError: firstError
+			});
+		});
+
+		it('Should Keep Custom Error Name in previous Error if it is a custom Error', () => {
+
+			const firstError = new F('First', 'Deep');
+			const secondError = new F(firstError, 'Custom');
+
+			assert.deepStrictEqual({
+				errorName: secondError.name,
+				errorMessage: secondError.message,
+				previousError: secondError.previousError
+			}, {
+				errorName: 'Custom',
+				errorMessage: 'Deep: First',
+				previousError: firstError
+			});
+		});
+	});
 });
