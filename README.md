@@ -76,3 +76,33 @@ This is not an Error: I don't care
 */
 ```
 
+## Utils
+
+### previousError
+
+If `F` create from another Error can get this one using the getter `previousError`
+
+```js
+const F = require('press-f');
+
+try {
+
+    shouldNotHappen();
+
+} catch (error) {
+    throw new F(error, 'Custom');
+}
+
+/*
+output: 
+        throw new F(error, 'Custom');
+        ^
+
+Custom: Error: 'Old Error'
+    at ...
+
+    name: 'Custom',
+    previousError: Error: 'Old Error'
+        at ...
+*/
+```
